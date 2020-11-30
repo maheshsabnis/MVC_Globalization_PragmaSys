@@ -1,0 +1,96 @@
+﻿@*Referring Namespace containing all resource Constants and names*@ 
+@using RourcesProvider
+@model MVC_Globalization.Models.Student
+
+@{
+	ViewBag.Title = Resource.Create;
+}
+
+<h2>@Resource.Create</h2>
+
+
+@*Create a DropDown so that User can select culture and submit it*@
+
+<div class="container">
+	@using (Html.BeginForm("SetNewCulture", "Student"))
+	{
+		@*The DropDown will show all cultures
+			the 'cultureName' is the values selected by end-user
+			e.g. en-US, the 'cultureText' is displayed in the dropdown list
+			the 'Session["Culture"]' will; contains the selected cultureName
+			 This will be submited to the SetNewCulture method of StudentCOntroller *@
+		<div class="form-group">
+			<label>Select Language</label>
+			@Html.DropDownList("cultureName",
+			new SelectList(ViewBag.Cultures, "cultureName", "cultureText",
+			 Session["Culture"]), new { onchange = "this.form.submit();" })
+		</div>
+	}
+</div>
+
+
+
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	<div class="form-horizontal">
+		<h4>@Resource.Student</h4>
+		<hr />
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+		<div class="form-group">
+			@Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.CollageName, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.CollageName, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.CollageName, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Create" class="btn btn-default" />
+			</div>
+		</div>
+	</div>
+}
+
+<div>
+	@Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}
