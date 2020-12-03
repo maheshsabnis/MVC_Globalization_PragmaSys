@@ -1,0 +1,9 @@
+﻿@model IEnumerable<MVC_EF_FluentAPI.Models.Customer>
+
+@{
+    ViewBag.Title = "IndexWithHelper";
+}
+
+<h2>Demo with new Html Helper</h2>
+
+@Html.ListData(Model.ToList()) 

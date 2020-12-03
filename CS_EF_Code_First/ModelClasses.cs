@@ -20,6 +20,9 @@ namespace CS_EF_Code_First
 		[StringLength(200)]
 		public string CategoryName { get; set; }
 		[Required]
+		[StringLength(100)]
+		public string SubCategoryName { get; set; }
+		[Required]
 		public int BasePrice { get; set; }
 		// One-to-Many Relationship
 		public ICollection<Product> Products { get; set; }
@@ -42,6 +45,8 @@ namespace CS_EF_Code_First
 		public string ProductName { get; set; }
 		[Required]
 		public int Price { get; set; }
+		[Required]
+		public int SalesTax { get; set; }
 		// foreign key
 		[Required]
 		public int CategoryRowId { get; set; }
