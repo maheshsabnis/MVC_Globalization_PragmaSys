@@ -7,6 +7,10 @@ using Microsoft.AspNet.Identity.EntityFramework;
 namespace MVC_EF_FluentAPI.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
+   /// <summary>
+   /// Class used to create and manage Applicaiton Users and 
+   /// generate identity for the current login user
+   /// </summary>
     public class ApplicationUser : IdentityUser
     {
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -17,7 +21,9 @@ namespace MVC_EF_FluentAPI.Models
             return userIdentity;
         }
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()

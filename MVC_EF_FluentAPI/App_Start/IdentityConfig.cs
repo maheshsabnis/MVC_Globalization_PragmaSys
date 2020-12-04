@@ -39,7 +39,12 @@ namespace MVC_EF_FluentAPI
             : base(store)
         {
         }
-
+        /// <summary>
+        /// Used to register the User with the Valdiation Rules
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
         {
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));

@@ -79,7 +79,9 @@ namespace MVC_EF_FluentAPI.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-    }
+        // The Role Name selected for the User
+		public string RoleName { get; set; }
+	}
 
     public class ResetPasswordViewModel
     {

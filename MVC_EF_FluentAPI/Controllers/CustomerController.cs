@@ -17,6 +17,8 @@ namespace MVC_EF_FluentAPI.Controllers
         }
 
         // GET: Customer
+       // [Authorize(Users ="mahesh@msit.com,tejas@msit.com,ajay@msit.com")]
+       [Authorize(Roles ="Admin,Manager,Clerk")]
         public ActionResult Index()
         {
             var result = ctx.Customers.ToList();
@@ -28,7 +30,8 @@ namespace MVC_EF_FluentAPI.Controllers
             var result = ctx.Customers.ToList();
             return View(result);
         }
-
+        //[Authorize(Users = "mahesh@msit.com,tejas@msit.com")]
+        [Authorize(Roles = "Admin,Manager")]
         public ActionResult Create()
         {
             var cust = new Customer();

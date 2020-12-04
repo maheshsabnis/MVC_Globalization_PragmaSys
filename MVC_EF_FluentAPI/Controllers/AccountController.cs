@@ -18,8 +18,12 @@ namespace MVC_EF_FluentAPI.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        ApplicationDbContext context;
+
         public AccountController()
         {
+            // uaed for reading roles
+            context = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -139,6 +143,12 @@ namespace MVC_EF_FluentAPI.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            // return Register.cshtml view
+            // SelectList: A class under System.Web.Mvc. THos is used to pass
+            // collection  to View from the Action Method
+            // ON the View this colleciton is showen in DropDownList
+            //                              //List of Roles,         Role Name to select, Role Name to Display   
+            ViewBag.RoleName = new SelectList(context.Roles.ToList(), "Name", "Name");
             return View();
         }
 
@@ -155,6 +165,14 @@ namespace MVC_EF_FluentAPI.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+
+                    // Write Logic for assigning User to Role
+                    // Recommended to verify the Role Name Exists in Roles using RoleManager class
+
+                                        // User id , RoleName pasoted from View    
+                    UserManager.AddToRole(user.Id, model.RoleName);
+
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
